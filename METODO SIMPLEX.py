@@ -85,16 +85,16 @@ def simplex(c, A, b, tipo):
     return solution, tableau[-1, -1]
 def mostrar_instrucciones():
     texto = (
-        "🧠 Cómo ingresar los datos:\n\n"
-        "🔹 Función objetivo:\n"
+        " Cómo ingresar los datos:\n\n"
+        " Función objetivo:\n"
         "Escribe solo los coeficientes separados por espacio.\n"
         "Ejemplo: 3 5  → para Z = 3x₁ + 5x₂\n\n"
-        "🔹 Restricciones:\n"
+        " Restricciones:\n"
         "Cada restricción se divide en:\n"
         "1. Coeficientes (Ej: 2 1)\n"
         "2. Término independiente (Ej: 10)\n"
         "Ejemplo: 2x₁ + x₂ ≤ 10 → escribe: 2 1 y luego 10\n\n"
-        "❌ No uses letras, símbolos ni signos como ≤ o ="
+        " No uses letras, símbolos ni signos como ≤ o ="
     )
     messagebox.showinfo("Instrucciones", texto)
 def resolver():
@@ -165,7 +165,38 @@ root.title("🧮 Optimización con Simplex y Gauss-Jordan")
 root.geometry("750x900")
 
 
-ctk.CTkLabel(root, text="🎯 Tipo de problema (max/min):", font=("Arial Rounded MT Bold", 18),
+ctk.CTkLabel(root, text=" Tipo de problema (max/min):", font=("Arial Rounded MT Bold", 18),
              text_color=label_color).pack()
 tipo_var = ctk.StringVar(value="max")
 ctk.CTkEntry(root, textvariable=tipo_var, border_width=2, placeholder_text="max o min").pack(pady=5)
+
+
+ctk.CTkLabel(root, text=" Número de variables:", font=("Arial Rounded MT Bold", 18),
+             text_color=label_color).pack()
+entry_vars = ctk.CTkEntry(root, border_width=2, placeholder_text="Ejemplo: 2")
+entry_vars.pack(pady=5)
+
+
+ctk.CTkLabel(root, text=" Número de restricciones:", font=("Arial Rounded MT Bold", 18),
+             text_color=label_color).pack()
+entry_constraints = ctk.CTkEntry(root, border_width=2, placeholder_text="Ejemplo: 3")
+entry_constraints.pack(pady=5)
+
+
+frame_inputs = ctk.CTkFrame(root, corner_radius=10)
+frame_inputs.pack(pady=10)
+
+
+ctk.CTkButton(root, text=" Ver instrucciones", command=mostrar_instrucciones,
+              fg_color=boton_color, hover_color=hover_color, text_color=texto_color).pack(pady=10)
+
+ctk.CTkButton(root, text=" Crear campos", command=crear_campos,
+              fg_color=boton_color, hover_color=hover_color, text_color=texto_color).pack(pady=10)
+
+ctk.CTkButton(root, text=" Resolver", command=resolver,
+              fg_color=boton_color, hover_color=hover_color, text_color=texto_color).pack(pady=10)
+# Inicializar variables globales
+entries_A = []
+entries_b = []
+entry_obj = None
+root.mainloop()
