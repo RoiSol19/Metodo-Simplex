@@ -94,3 +94,32 @@ def mostrar_instrucciones():
         "❌ No uses letras, símbolos ni signos como ≤ o ="
     )
     messagebox.showinfo("Instrucciones", texto)
+def resolver():
+    try:
+        tipo = tipo_var.get()
+        num_vars = int(entry_vars.get())
+        num_constraints = int(entry_constraints.get())
+
+        c = np.array(list(map(float, entry_obj.get().split())))
+        if len(c) != num_vars:
+            raise ValueError("La cantidad de coeficientes no coincide con el número de variables.")
+
+        A = []
+        b = []
+
+        for i in range(num_constraints):
+            fila = list(map(float, entries_A[i].get().split()))
+            if len(fila) != num_vars:
+                raise ValueError(f"Restricción {i+1}: número de coeficientes incorrecto.")
+            A.append(fila)
+            b_val = float(entries_b[i].get())
+            b.append(b_val)
+
+        A = np.array(A)
+        b = np.array(b)
+
+        resultado = simplex(c, A, b, tipo)
+        mostrar_tabla(np.array([]), resultado=resultado)
+    except Exception as e:
+        messagebox.showerror("Error", f"❌ Ocurrió un problema:\n{str(e)}\n\nVerifica que los datos estén bien escritos y que las cantidades coincidan.")
+
