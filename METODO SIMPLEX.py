@@ -55,8 +55,8 @@ def mostrar_tabla(tabla, pivot_row=None, pivot_col=None, resultado=None):
         plt.title(f"Resultado óptimo: {resultado[1]:.2f}", fontsize=12, color=border_color)
         plt.tight_layout()
         plt.show()
-        def simplex(c, A, b, tipo):
-         m, n = A.shape
+def simplex(c, A, b, tipo):
+    m, n = A.shape
     if tipo == "min":
         c = -c
 
