@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from tkinter import messagebox
+
 
 
 boton_color = "#AEDFF7"
@@ -50,4 +52,18 @@ def mostrar_tabla(tabla, pivot_row=None, pivot_col=None, resultado=None):
         plt.title(f"Resultado óptimo: {resultado[1]:.2f}", fontsize=12, color=border_color)
         plt.tight_layout()
         plt.show()
+def mostrar_instrucciones():
+    texto = (
+        "🧠 Cómo ingresar los datos:\n\n"
+        "🔹 Función objetivo:\n"
+        "Escribe solo los coeficientes separados por espacio.\n"
+        "Ejemplo: 3 5  → para Z = 3x₁ + 5x₂\n\n"
+        "🔹 Restricciones:\n"
+        "Cada restricción se divide en:\n"
+        "1. Coeficientes (Ej: 2 1)\n"
+        "2. Término independiente (Ej: 10)\n"
+        "Ejemplo: 2x₁ + x₂ ≤ 10 → escribe: 2 1 y luego 10\n\n"
+        "❌ No uses letras, símbolos ni signos como ≤ o ="
+    )
+    messagebox.showinfo("Instrucciones", texto)
 
