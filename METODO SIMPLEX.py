@@ -158,3 +158,14 @@ def crear_campos():
             entries_b.append(eb)
     except:
         messagebox.showerror("Error", "Por favor, ingresa valores válidos para variables y restricciones.")
+
+        
+root = ctk.CTk()
+root.title("🧮 Optimización con Simplex y Gauss-Jordan")
+root.geometry("750x900")
+
+
+ctk.CTkLabel(root, text="🎯 Tipo de problema (max/min):", font=("Arial Rounded MT Bold", 18),
+             text_color=label_color).pack()
+tipo_var = ctk.StringVar(value="max")
+ctk.CTkEntry(root, textvariable=tipo_var, border_width=2, placeholder_text="max o min").pack(pady=5)
