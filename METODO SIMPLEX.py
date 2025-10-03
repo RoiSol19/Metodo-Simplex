@@ -195,7 +195,7 @@ ctk.CTkButton(root, text=" Crear campos", command=crear_campos,
 
 ctk.CTkButton(root, text=" Resolver", command=resolver,
               fg_color=boton_color, hover_color=hover_color, text_color=texto_color).pack(pady=10)
-# Inicializar variables globales
+
 entries_A = []
 entries_b = []
 entry_obj = None
