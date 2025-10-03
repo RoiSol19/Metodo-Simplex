@@ -1,8 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import customtkinter as ctk
 from tkinter import messagebox
 
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("green")
 
 
 boton_color = "#AEDFF7"
@@ -122,4 +125,36 @@ def resolver():
         mostrar_tabla(np.array([]), resultado=resultado)
     except Exception as e:
         messagebox.showerror("Error", f"❌ Ocurrió un problema:\n{str(e)}\n\nVerifica que los datos estén bien escritos y que las cantidades coincidan.")
+def crear_campos():
+    global entries_A, entries_b, entry_obj
+    for widget in frame_inputs.winfo_children():
+        widget.destroy()
+    try:
+        num_vars = int(entry_vars.get())
+        num_constraints = int(entry_constraints.get())
 
+        ctk.CTkLabel(frame_inputs, text="🔹 Coeficientes de la función objetivo (x₁ x₂ ...):",
+                     font=("Consolas", 14), text_color=label_color).pack()
+        entry_obj = ctk.CTkEntry(frame_inputs, border_width=2, placeholder_text="Ejemplo: 3 5")
+        entry_obj.pack(pady=5)
+        animar_entry(entry_obj, ["#A3D9A5", "#C0EAC2", "#DFF5E1"])
+
+        entries_A = []
+        entries_b = []
+
+        for i in range(num_constraints):
+            ctk.CTkLabel(frame_inputs, text=f"🔸 Restricción {i+1} - Coeficientes (x₁ x₂ ...):",
+                         font=("Consolas", 13), text_color=label_color).pack()
+            e = ctk.CTkEntry(frame_inputs, border_width=2, placeholder_text="Ejemplo: 2 1")
+            e.pack(pady=2)
+            animar_entry(e, ["#E6F2FF", "#CCE5FF", "#DDEEFF"])
+            entries_A.append(e)
+
+            ctk.CTkLabel(frame_inputs, text=f"🔸 Restricción {i+1} - Término independiente:",
+                         font=("Consolas", 13), text_color=label_color).pack()
+            eb = ctk.CTkEntry(frame_inputs, border_width=2, placeholder_text="Ejemplo: 10")
+            eb.pack(pady=2)
+            animar_entry(eb, ["#E6F2FF", "#CCE5FF", "#DDEEFF"])
+            entries_b.append(eb)
+    except:
+        messagebox.showerror("Error", "Por favor, ingresa valores válidos para variables y restricciones.")
